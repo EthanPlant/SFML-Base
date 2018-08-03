@@ -8,9 +8,8 @@ set(LIBS ${LIBS}
     sfml-main)
 
 set(SRC_FILES
-    statemanager.hpp
     statemanager.cpp
-    state.hpp
+    assetmanager.cpp
     )
 
 add_library(src ${SRC_FILES})
