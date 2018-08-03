@@ -14,7 +14,7 @@ class StateManager
         StateManager() {}
         ~StateManager() {}
 
-        void addState(stateRef newState, bool isReplacing);
+        void addState(stateRef newState, bool isReplacing = true);
         void removeState();
         void processStateChanges();
 

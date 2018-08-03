@@ -3,7 +3,8 @@
     "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
     "files.associations": {
         "xiosbase": "cpp",
-        "memory": "cpp"
+        "memory": "cpp",
+        "ostream": "cpp"
     },
     "C_Cpp.configurationWarnings": "Disabled"
 }

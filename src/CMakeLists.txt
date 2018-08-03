@@ -11,6 +11,7 @@ set(SRC_FILES
     statemanager.cpp
     assetmanager.cpp
     game.cpp
+    examplestate.cpp
     )
 
 add_library(src ${SRC_FILES})

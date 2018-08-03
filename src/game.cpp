@@ -1,11 +1,12 @@
 #include "game.hpp"
+#include "examplestate.hpp"
 
 Game::Game(int width, int height, std::string title)
 {
     data->window.create(sf::VideoMode(width, height), title,
         sf::Style::Close | sf::Style::Titlebar);
-    // TODO create state
-    run();
+    data->states.addState(stateRef(new ExampleState(this->data)));
+    this->run();
 }
 
 void Game::run()
