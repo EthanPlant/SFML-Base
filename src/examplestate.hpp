@@ -24,4 +24,5 @@ class ExampleState : public State
 
         sf::Sprite sprite;
         sf::Text text;
+        sf::CircleShape shape;
 };

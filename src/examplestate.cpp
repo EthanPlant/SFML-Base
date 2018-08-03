@@ -8,6 +8,7 @@ void ExampleState::init()
     // Load assets
     this->_data->assets.loadFont("Test", "assets/test.ttf");
     this->_data->assets.loadTexture("Test", "assets/test.png");
+    this->_data->assets.loadShader("Test Shader", "assets/test.vs", "assets/test.fs");
 
     // Set text attributes
     this->text.setFont(this->_data->assets.getFont("Test"));
@@ -18,8 +19,18 @@ void ExampleState::init()
 
     // Set sprite attributes
     this->sprite.setTexture(this->_data->assets.getTexture("Test"));
-    this->sprite.setPosition(30, 30);
+    this->sprite.setPosition(100, 100);
+    this->sprite.setOrigin(32, 32);
     this->sprite.scale(3, 3);
+
+    // Create circle
+    shape.setRadius(100.f);
+    shape.setOrigin(shape.getRadius(), shape.getRadius());
+    shape.setPosition(sf::Vector2f(this->_data->window.getSize()) / 2.f);
+    shape.setFillColor(sf::Color::Transparent);
+
+    // Set shader attributes
+    this->_data->assets.getShader("Test Shader").setParameter("windowHeight", static_cast<float>(this->_data->window.getSize().y));
 }
 
 void ExampleState::handleInput()
@@ -39,8 +50,13 @@ void ExampleState::handleInput()
 
 void ExampleState::render(float delta)
 {
-    this->_data->window.clear(sf::Color::White);
+    this->_data->window.clear(sf::Color::Black);
     this->_data->window.draw(this->sprite);
     this->_data->window.draw(this->text);
+    this->_data->assets.getShader("Test Shader").setParameter("color", sf::Color::Blue);
+    this->_data->assets.getShader("Test Shader").setParameter("center", shape.getPosition());
+    this->_data->assets.getShader("Test Shader").setParameter("radius", shape.getRadius());
+    this->_data->assets.getShader("Test Shader").setParameter("expand", 0.25f);
+    this->_data->window.draw(shape, &this->_data->assets.getShader("Test Shader"));
     this->_data->window.display();
 }

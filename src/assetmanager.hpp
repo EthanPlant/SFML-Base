@@ -17,7 +17,12 @@ class AssetManager
         const sf::Font& getFont(std::string name);
         void disposeFont(std::string name);
 
+        void loadShader(std::string name, std::string vertexPath, std::string fragmentPath);
+        sf::Shader& getShader(std::string name);
+        void disposeShader(std::string name);
+
     private:
         std::map<std::string, sf::Texture> textures;
         std::map<std::string, sf::Font> fonts;
+        std::map<std::string, sf::Shader> shaders;
 };
