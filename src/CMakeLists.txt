@@ -10,6 +10,7 @@ set(LIBS ${LIBS}
 set(SRC_FILES
     statemanager.cpp
     assetmanager.cpp
+    game.cpp
     )
 
 add_library(src ${SRC_FILES})

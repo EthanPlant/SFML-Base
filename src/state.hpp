@@ -6,8 +6,8 @@ class State
         virtual void init() = 0;
 
         virtual void handleInput() = 0;
-        virtual void update() = 0;
-        virtual void render() = 0;
+        virtual void update(float delta) = 0;
+        virtual void render(float delta) = 0;
 
         virtual void pause() {}
         virtual void resume() {}
