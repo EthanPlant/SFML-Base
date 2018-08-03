@@ -2,6 +2,8 @@
     "cmake.configureOnOpen": true,
     "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
     "files.associations": {
-        "xiosbase": "cpp"
-    }
+        "xiosbase": "cpp",
+        "memory": "cpp"
+    },
+    "C_Cpp.configurationWarnings": "Disabled"
 }
