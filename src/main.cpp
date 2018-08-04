@@ -1,8 +1,9 @@
 #include "game.hpp"
+#include "DEFINATIONS.hpp"
 
 int main()
 {
-   Game(800, 600, "SFML Base");
+   Game(WINDOW_WIDTH, WINDOW_HEIGHT, "SFML Base");
 
     return EXIT_SUCCESS;
 }
