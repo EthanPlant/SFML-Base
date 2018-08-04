@@ -27,13 +27,52 @@ void Game::run()
 
         while (accumulator >= dt)
         {
+            #ifdef DEBUG_MODE
+                calculateUpdatesPerSecond();
+            #endif
+
             this->data->states.getActiveState()->handleInput();
             this->data->states.getActiveState()->update(dt);
 
             accumulator -= dt;
         }
 
+        #ifdef DEBUG_MODE
+            calculateFramesPerSecond();
+        #endif
+
         interpolation = accumulator / dt;
         this->data->states.getActiveState()->render(interpolation);
     }
 }
+
+#ifdef DEBUG_MODE
+    void Game::calculateFramesPerSecond()
+    {
+        this->frames++;
+        float time = this->fpsClock.getElapsedTime().asSeconds();
+        if (time >= 1.f)
+        {
+            this->data->FPS = this->frames;
+
+            this->fpsClock.restart();
+            this->frames = 0;
+        }
+    }
+#endif
+
+
+#ifdef DEBUG_MODE
+    void Game::calculateUpdatesPerSecond()
+    {
+        this->updates++;
+        float time = this->upsClock.getElapsedTime().asSeconds();
+        if (time >= 1.f)
+        {
+            this->data->UPS = this->updates;
+
+            this->upsClock.restart();
+            this->updates = 0;
+        }
+    }
+#endif

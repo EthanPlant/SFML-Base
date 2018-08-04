@@ -14,8 +14,15 @@ void ExampleState::init()
     this->text.setFont(this->_data->assets.getFont("Test"));
     this->text.setString("An example SFML Base Code state");
     this->text.setCharacterSize(24);
-    this->text.setColor(sf::Color::Black);
+    this->text.setColor(sf::Color::White);
     this->text.setPosition(4, this->_data->window.getSize().y - 30);
+
+    #ifdef DEBUG_MODE
+        this->stats.setFont(this->_data->assets.getFont("Test"));
+        this->stats.setCharacterSize(12);
+        this->stats.setColor(sf::Color::White);
+        this->stats.setPosition(4, 4);
+    #endif
 
     // Set sprite attributes
     this->sprite.setTexture(this->_data->assets.getTexture("Test"));
@@ -50,13 +57,25 @@ void ExampleState::handleInput()
 
 void ExampleState::render(float delta)
 {
+    #ifdef DEBUG_MODE
+        std::stringstream ss;
+        ss << "UPS: " << this->_data->UPS << " FPS: " << this->_data->FPS;
+        this->stats.setString(ss.str());
+    #endif
+
     this->_data->window.clear(sf::Color::Black);
     this->_data->window.draw(this->sprite);
     this->_data->window.draw(this->text);
+
     this->_data->assets.getShader("Test Shader").setParameter("color", sf::Color::Blue);
     this->_data->assets.getShader("Test Shader").setParameter("center", shape.getPosition());
     this->_data->assets.getShader("Test Shader").setParameter("radius", shape.getRadius());
     this->_data->assets.getShader("Test Shader").setParameter("expand", 0.25f);
     this->_data->window.draw(shape, &this->_data->assets.getShader("Test Shader"));
+
+    #ifdef DEBUG_MODE
+        this->_data->window.draw(this->stats);
+    #endif
+
     this->_data->window.display();
 }

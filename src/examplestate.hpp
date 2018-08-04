@@ -1,9 +1,12 @@
 #pragma once
 
+#include <sstream>
+
 #include <SFML/Graphics.hpp>
 
 #include "state.hpp"
 #include "game.hpp"
+#include "DEFINATIONS.hpp"
 
 class ExampleState : public State
 {
@@ -25,4 +28,7 @@ class ExampleState : public State
         sf::Sprite sprite;
         sf::Text text;
         sf::CircleShape shape;
+        #ifdef DEBUG_MODE
+            sf::Text stats;
+        #endif
 };
