@@ -91,3 +91,30 @@ void AssetManager::disposeShader(std::string name)
     std::cout << "Disposing shader " << name << std::endl;
     this->shaders.erase(name);
 }
+
+void AssetManager::loadSound(std::string name, std::string filePath)
+{
+    // Create temp sound buffer object
+    sf::SoundBuffer sb;
+
+    // Attempt to load sound from file
+    if (sb.loadFromFile(filePath))
+    {
+        std::cout << "Adding sound " << name << std::endl;
+        this->sounds[name] = sb;
+    }
+    else
+    {
+        std::cout << "Couldn't add sound " << name << std::endl;
+    }
+}
+
+const sf::SoundBuffer& AssetManager::getSound(std::string name)
+{
+    return this->sounds[name];
+}
+
+void AssetManager::disposeSound(std::string name)
+{
+    this->sounds.erase(name);
+}

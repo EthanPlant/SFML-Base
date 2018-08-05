@@ -21,8 +21,13 @@ class AssetManager
         sf::Shader& getShader(std::string name);
         void disposeShader(std::string name);
 
+        void loadSound(std::string name, std::string filePath);
+        const sf::SoundBuffer& getSound(std::string name);
+        void disposeSound(std::string name);
+
     private:
         std::map<std::string, sf::Texture> textures;
         std::map<std::string, sf::Font> fonts;
         std::map<std::string, sf::Shader> shaders;
+        std::map<std::string, sf::SoundBuffer> sounds;
 };
