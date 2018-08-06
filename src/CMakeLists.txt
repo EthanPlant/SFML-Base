@@ -12,6 +12,8 @@ set(SRC_FILES
     assetmanager.cpp
     game.cpp
     examplestate.cpp
+    animation.cpp
+    animatedsprite.cpp
     )
 
 add_library(src ${SRC_FILES})
