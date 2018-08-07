@@ -61,18 +61,44 @@ void AssetManager::loadShader(std::string name, std::string vertexPath, std::str
     // Check to make sure the GPU supports shaders
     if (sf::Shader::isAvailable())
     {
-        // Create temp shader object
+        // Create shader object in map
         this->shaders[name];
 
-        // Attempt to load shader from file
-        if (this->shaders[name].loadFromFile(vertexPath, fragmentPath))
+        // Only vertex provided
+        if(vertexPath != "" && fragmentPath == "")
         {
-            std::cout << "Adding shader " << name << std::endl;
-
+            if(this->shaders[name].loadFromFile(vertexPath, sf::Shader::Vertex))
+            {
+                std::cout << "Adding vertex shader as" << name << std::endl;
+            }
+            else
+            {
+                std::cout << "Couldn't add vertex shader " << name << std::endl;
+            }
         }
+        // Only fragment provided
+        else if (vertexPath == "" && fragmentPath != "")
+        {
+            if (this->shaders[name].loadFromFile(fragmentPath, sf::Shader::Fragment))
+            {
+                std::cout << "Adding fragment shader " << name << std::endl;
+            }
+            else
+            {
+                std::cout << "Couldn't add fragment shader " << name << std::endl;
+            }
+        }
+        // Both vertex and fragment provided
         else
         {
-            std::cout << "Couldn't add shader " << name << std::endl;
+            if (this->shaders[name].loadFromFile(vertexPath, fragmentPath))
+            {
+                std::cout << "Adding shader " << name << std::endl;
+            }
+            else
+            {
+                std::cout << "Couldn't add shader " << name << std::endl;
+            }
         }
     }
     else
@@ -94,14 +120,17 @@ void AssetManager::disposeShader(std::string name)
 
 void AssetManager::loadSound(std::string name, std::string filePath)
 {
-    // Create temp sound buffer object
+    // Create temp sound abd sound buffer object
     sf::SoundBuffer sb;
+    sf::Sound sound;
 
     // Attempt to load sound from file
     if (sb.loadFromFile(filePath))
     {
         std::cout << "Adding sound " << name << std::endl;
-        this->sounds[name] = sb;
+        this->soundBuffers[name] = sb;
+        sound.setBuffer(this->soundBuffers[name]);
+        this->sounds[name] = sound;
     }
     else
     {
@@ -109,12 +138,57 @@ void AssetManager::loadSound(std::string name, std::string filePath)
     }
 }
 
-const sf::SoundBuffer& AssetManager::getSound(std::string name)
+const sf::Sound& AssetManager::getSound(std::string name)
 {
     return this->sounds[name];
 }
 
 void AssetManager::disposeSound(std::string name)
 {
+    this->soundBuffers.erase(name);
     this->sounds.erase(name);
+}
+
+void AssetManager::loadAnimation(std::string name, std::string filePath)
+{
+    // Create temp spritesheet and animation objects
+    Animation animation;
+    sf::Texture spriteSheet;
+
+    // Attempt to laod spritesheet from file
+    if (spriteSheet.loadFromFile(filePath))
+    {
+        std::cout << "Adding animation " << name << std::endl;
+        // Store spritesheet and set it to animation
+        this->spriteSheets[name] = spriteSheet;
+        animation.setSpriteSheet(this->spriteSheets[name]);
+        // Store animation
+        this->animations[name] = animation;
+    }
+}
+
+Animation& AssetManager::getAnimation(std::string name)
+{
+    return this->animations[name];
+}
+
+void AssetManager::disposeAnimation(std::string name)
+{
+    // Erase both spritesheet and animation
+    this->animations.erase(name);
+    this->spriteSheets.erase(name);
+}
+
+void AssetManager::loadMusic(std::string name, std::string filePath)
+{
+    this->songs[name];
+    if (this->songs[name].openFromFile(filePath))
+    {
+        std::cout << "Adding music " << name << std::endl;
+    }
+}
+
+sf::Music& AssetManager::getMusic(std::string name)
+{
+    return this->songs[name];
 }

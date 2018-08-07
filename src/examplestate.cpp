@@ -8,7 +8,7 @@ void ExampleState::init()
     // Load assets
     this->_data->assets.loadFont("Test", "assets/test.ttf");
     this->_data->assets.loadTexture("Test", "assets/test.png");
-    this->_data->assets.loadShader("Test Shader", "assets/test.vs", "assets/test.fs");
+    this->_data->assets.loadShader("Test Shader", "", "assets/test.fs");
 
     // Set text attributes
     this->text.setFont(this->_data->assets.getFont("Test"));
@@ -38,6 +38,9 @@ void ExampleState::init()
 
     // Set shader attributes
     this->_data->assets.getShader("Test Shader").setParameter("windowHeight", static_cast<float>(this->_data->window.getSize().y));
+
+    this->_data->assets.loadMusic("Test", "assets/test.wav");
+    this->_data->assets.getMusic("Test").play();
 }
 
 void ExampleState::handleInput()
