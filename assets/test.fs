@@ -1,3 +1,5 @@
+#version 120
+
 uniform vec4 color;
 uniform float expand;
 uniform vec2 center;

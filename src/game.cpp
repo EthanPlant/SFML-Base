@@ -6,7 +6,7 @@ Game::Game(int width, int height, std::string title)
     data->window.create(sf::VideoMode(width, height), title,
         sf::Style::Close | sf::Style::Titlebar);
     data->states.addState(stateRef(new ExampleState(this->data)));
-    data->window.setFramerateLimit(300);
+    //data->window.setFramerateLimit(300);
     this->run();
 }
 

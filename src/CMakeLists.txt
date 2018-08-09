@@ -5,7 +5,7 @@ find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
 set(LIBS ${LIBS}
     sfml-graphics
     sfml-audio
-    sfml-main)
+    )
 
 set(SRC_FILES
     statemanager.cpp
@@ -17,6 +17,9 @@ set(SRC_FILES
     )
 
 add_library(src ${SRC_FILES})
+if(WIN32)
+    add_library(sfml-main)
+endif(WIN32)
 
 target_link_libraries(src ${LIBS})
 
