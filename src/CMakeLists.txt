@@ -18,7 +18,7 @@ set(SRC_FILES
 
 add_library(src ${SRC_FILES})
 if(WIN32)
-    add_library(sfml-main)
+    target_link_libraries(src sfml-main)
 endif(WIN32)
 
 target_link_libraries(src ${LIBS})
